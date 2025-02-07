@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { KeyboardKeyState } from "../../types/keyboard";
 import {
   FIRST_KEYBOARD_ROW,
@@ -19,6 +20,26 @@ export interface KeyboardProps {
 }
 
 export const Keyboard = (props: KeyboardProps) => {
+  useEffect(() => {
+    const keyDownListener = (e: KeyboardEvent) => {
+      e.preventDefault();
+
+      if (e.key === "Backspace") {
+        props.onDeleteClick();
+      } else if (e.key === "Enter") {
+        props.onEnterClick();
+      } else if (e.key.match(/^[a-zA-Z]$/)) {
+        props.onLetterClick(e.key.toUpperCase());
+      }
+    };
+
+    document.addEventListener("keydown", keyDownListener);
+
+    return () => {
+      document.removeEventListener("keydown", keyDownListener);
+    };
+  }, [props]);
+
   const calculateLetterPositions = (
     searchedCharacter: string,
     lettersPressed: string,
