@@ -7,3 +7,5 @@ export const LETTER_COUNT = 5;
 
 export const WORD_API_URL =
   "https://random-word-api.vercel.app/api?words=1&length=5&type=uppercase";
+export const REAL_WORD_API_URL =
+  "https://api.dictionaryapi.dev/api/v2/entries/en/";
