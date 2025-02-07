@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  margin-top: 6px;
 }
 
 .keyboard-row {
@@ -20,7 +21,8 @@
   font-weight: bold;
   border: 0;
   padding: 0;
-  margin: 0 6px 0 0;
+  margin-left: 3px;
+  margin-right: 3px;
   border-radius: 4px;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */

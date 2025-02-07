@@ -16,7 +16,7 @@ export interface KeyboardProps {
   onDeleteClick: () => void;
   onEnterClick: () => void;
   lettersPressed: string;
-  mockSessionWord: string;
+  randomSessionWord: string;
 }
 
 export const Keyboard = (props: KeyboardProps) => {
@@ -58,11 +58,11 @@ export const Keyboard = (props: KeyboardProps) => {
     if (props.lettersPressed.includes(character)) {
       if (
         calculateLetterPositions(character, props.lettersPressed).includes(
-          props.mockSessionWord.indexOf(character),
+          props.randomSessionWord.indexOf(character),
         )
       ) {
         return KeyboardKeyState.PRESSED_CORRECT_PLACE;
-      } else if (props.mockSessionWord.includes(character) === false) {
+      } else if (props.randomSessionWord.includes(character) === false) {
         return KeyboardKeyState.PRESSED_NOT_EXISTING;
       } else {
         return KeyboardKeyState.PRESSED_WRONG_PLACE;

@@ -3,9 +3,10 @@ import { Row } from "./components/row/row";
 import { Keyboard } from "./components/keyboard/keyboard";
 import { useState } from "react";
 import { LETTER_COUNT, ROW_COUNT } from "./utils/constants";
+import { useRandomWord } from "./hooks/useRandomWord";
 
 export const App = () => {
-  const mockSessionWord = "ALIVE";
+  const { randomSessionWord } = useRandomWord();
   const [currentAttempt, setCurrentAttempt] = useState<number>(0);
   const [attempts, setAttempts] = useState<string[]>(() => {
     const attemptsArray = [];
@@ -48,13 +49,18 @@ export const App = () => {
 
     for (let i = 0; i < currentAttempt; i++) {
       if (attempts[i] === attempts[currentAttempt]) {
-        console.log("Same word is not allowed!");
+        console.log("Same word is not allowed");
         return;
       }
     }
+
     setLettersPressed(attempts[currentAttempt] + lettersPressed);
     setCurrentAttempt(currentAttempt + 1);
   };
+
+  if (!randomSessionWord) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
@@ -64,7 +70,7 @@ export const App = () => {
             key={`row-${index}`}
             letterCount={LETTER_COUNT}
             word={attempt}
-            mockSessionWord={mockSessionWord}
+            randomSessionWord={randomSessionWord}
             isCurrentAttemptRow={currentAttempt === index}
           />
         );
@@ -80,7 +86,7 @@ export const App = () => {
           onEnterClickHandler();
         }}
         lettersPressed={lettersPressed}
-        mockSessionWord={mockSessionWord}
+        randomSessionWord={randomSessionWord}
       />
     </>
   );

@@ -5,7 +5,7 @@ import "./row.css";
 export interface RowProps {
   word: string;
   letterCount: number;
-  mockSessionWord: string;
+  randomSessionWord: string;
   isCurrentAttemptRow: boolean;
 }
 
@@ -14,9 +14,9 @@ export const Row = (props: RowProps) => {
     if (props.isCurrentAttemptRow || letter === "") {
       return LetterState.LETTER_EMPTY;
     } else {
-      if (letter === props.mockSessionWord.charAt(index)) {
+      if (letter === props.randomSessionWord.charAt(index)) {
         return LetterState.LETTER_CORRECT;
-      } else if (props.mockSessionWord.includes(letter)) {
+      } else if (props.randomSessionWord.includes(letter)) {
         return LetterState.LETTER_PRESENT;
       } else {
         return LetterState.LETTER_ABSENT;
