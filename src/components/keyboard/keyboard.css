@@ -1,0 +1,66 @@
+.keyboard {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.keyboard-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  font-size: 1.25em;
+  font-weight: bold;
+  border: 0;
+  padding: 0;
+  margin: 0 6px 0 0;
+  border-radius: 4px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+  border-color: #3a3a3c;
+}
+
+.key:hover {
+  cursor: pointer;
+  background-color: #5b5c5c;
+}
+
+.keyboard-key {
+  width: 43px;
+  height: 58px;
+}
+
+.not-pressed {
+  background-color: #818384;
+}
+
+.pressed-not-existing {
+  background-color: #3a3a3c;
+}
+
+.pressed-wrong-place {
+  background-color: #b59f3b;
+}
+
+.pressed-correct-place {
+  background-color: #538d4e;
+}
+
+.delete-key {
+  width: 67px;
+  height: 58px;
+}
+
+.enter-key {
+  width: 67px;
+  height: 58px;
+}

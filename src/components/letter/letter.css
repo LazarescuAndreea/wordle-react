@@ -1,0 +1,36 @@
+.letter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  border: 1.6px solid #3a3a3c;
+  height: 49.3px;
+  width: 48.8px;
+  margin: 2.5px;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f8f8f8;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.letter-empty {
+  background-color: #121213;
+}
+
+.letter-correct {
+  background-color: #538d4e;
+  border-color: #538d4e;
+}
+
+.letter-present {
+  background-color: #b59f3b;
+  border-color: #b59f3b;
+}
+
+.letter-absent {
+  background-color: #3a3a3c;
+  border-color: #3a3a3c;
+}
