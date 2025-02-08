@@ -1,24 +1,18 @@
-import "./App.css";
-import { Row } from "./components/row/row";
-import { Keyboard } from "./components/keyboard/keyboard";
 import { useState } from "react";
 import { LETTER_COUNT, ROW_COUNT } from "./utils/constants";
+import { Keyboard } from "./components/keyboard/keyboard";
+import { RestartKey } from "./components/keyboard/restart-key";
+import { GuessBoard } from "./components/guess-board/guess-board";
 import { useRandomWord } from "./hooks/useRandomWord";
 import { useRealWord } from "./hooks/useRealWord";
+import { getInitialAttempts } from "./utils/attempts";
+import "./App.css";
 
 export const App = () => {
-  const { randomSessionWord } = useRandomWord();
+  const { randomSessionWord, fetchNewRandomWord } = useRandomWord();
   const { isWordReal } = useRealWord();
   const [currentAttempt, setCurrentAttempt] = useState<number>(0);
-  const [attempts, setAttempts] = useState<string[]>(() => {
-    const attemptsArray = [];
-
-    for (let i = 0; i < ROW_COUNT; i++) {
-      attemptsArray.push("");
-    }
-
-    return attemptsArray;
-  });
+  const [attempts, setAttempts] = useState<string[]>(getInitialAttempts);
   const [lettersPressed, setLettersPressed] = useState<string>("");
 
   const onLetterClickHandler = (letter: string) => {
@@ -70,23 +64,53 @@ export const App = () => {
       });
   };
 
+  const onRestartClickHandler = () => {
+    setAttempts(getInitialAttempts());
+    setCurrentAttempt(0);
+    setLettersPressed("");
+    fetchNewRandomWord();
+  };
+
   if (!randomSessionWord) {
     return <div>Loading...</div>;
   }
 
+  if (attempts[currentAttempt - 1] === randomSessionWord) {
+    return (
+      <div className="main-container">
+        <GuessBoard
+          attempts={attempts}
+          randomSessionWord={randomSessionWord}
+          currentAttempt={currentAttempt}
+        ></GuessBoard>
+        <div>Correct guess.</div>
+        <RestartKey onRestartClick={onRestartClickHandler} />
+      </div>
+    );
+  } else if (
+    currentAttempt === ROW_COUNT &&
+    attempts[currentAttempt - 1] != randomSessionWord
+  ) {
+    return (
+      <div className="main-container">
+        <GuessBoard
+          attempts={attempts}
+          randomSessionWord={randomSessionWord}
+          currentAttempt={currentAttempt}
+        ></GuessBoard>
+        <div>The word was {randomSessionWord}.</div>
+        <RestartKey onRestartClick={onRestartClickHandler} />
+      </div>
+    );
+  }
+
   return (
-    <>
-      {attempts.map((attempt, index) => {
-        return (
-          <Row
-            key={`row-${index}`}
-            letterCount={LETTER_COUNT}
-            word={attempt}
-            randomSessionWord={randomSessionWord}
-            isCurrentAttemptRow={currentAttempt === index}
-          />
-        );
-      })}
+    <div className="main-container">
+      <GuessBoard
+        attempts={attempts}
+        randomSessionWord={randomSessionWord}
+        currentAttempt={currentAttempt}
+      ></GuessBoard>
       <Keyboard
         onLetterClick={(letter) => {
           onLetterClickHandler(letter);
@@ -100,6 +124,6 @@ export const App = () => {
         lettersPressed={lettersPressed}
         randomSessionWord={randomSessionWord}
       />
-    </>
+    </div>
   );
 };

@@ -1,6 +1,6 @@
 import { LetterState } from "../../types/letter";
-import { Letter } from "../letter/letter";
-import "./row.css";
+import { Letter } from "../guess-board/letter";
+import "./guess-board.css";
 
 export interface RowProps {
   word: string;

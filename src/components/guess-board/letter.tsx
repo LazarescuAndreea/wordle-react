@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import "./letter.css";
+import "./guess-board.css";
 import { LetterState } from "../../types/letter";
 
 export interface LetterProps {

@@ -34,3 +34,11 @@
   background-color: #3a3a3c;
   border-color: #3a3a3c;
 }
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
